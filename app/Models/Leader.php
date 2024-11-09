@@ -26,6 +26,7 @@ class Leader extends Model
         'nama_bank',
         'nama_rekening',
         'owner_id',
+        'password',
         'created_by',
         'updated_by', // Add these columns
     ];
