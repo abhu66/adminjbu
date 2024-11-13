@@ -28,7 +28,7 @@ class Leader extends Model
         'owner_id',
         'password',
         'image',
-        'referal_code',
+        'referral_code',
         'created_by',
         'updated_by', // Add these columns
     ];

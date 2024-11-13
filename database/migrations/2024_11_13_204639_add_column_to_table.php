@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('members', function (Blueprint $table) {
-            $table->string('image');
-            $table->string('referral_code');
-        });
-        Schema::table('leaders', function (Blueprint $table) {
-            $table->string('image');
-            $table->string('referral_code');
+        Schema::table('products', function (Blueprint $table) {
+            $table->text('description');
         });
     }
 
