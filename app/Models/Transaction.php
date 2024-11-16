@@ -29,7 +29,7 @@ class Transaction extends Model
         'komisi_referral',
         'komisi_sponsor',
         'komisi_leader',
-        'status', //1 = pending payment, 2 = payment, 3 = Cancel
+        'status', //1 = pending payment, 2 = paid/approved, 3 = Cancel, 4 waiting approval
         'reward'
 
     ];
