@@ -29,6 +29,9 @@ class Member extends Model
         'nama_rekening',
         'leader_id',
         'sponsor_id',
+        'image',
+        'referal_code',
+        'password',
         'created_by',
         'updated_by'
     ];
