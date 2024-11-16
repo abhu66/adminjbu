@@ -14,6 +14,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 
 class ProductResource extends Resource
 {
@@ -112,10 +113,13 @@ class ProductResource extends Resource
                   ->width(50)
                   ->searchable(),
 
-              // Text column for price
-              Tables\Columns\TextColumn::make('price')
-                  ->width(50)
-                  ->searchable(),
+//               // Text column for price
+//               Tables\Columns\TextColumn::make('price')
+//                   ->width(50)
+//                   ->searchable(),
+                  TextColumn::make('price')
+                      ->formatStateUsing(fn ($state) => 'Rp ' . number_format($state, 0, ',', '.')),
+
 
 //               // Text column for description
 //               Tables\Columns\TextColumn::make('description')

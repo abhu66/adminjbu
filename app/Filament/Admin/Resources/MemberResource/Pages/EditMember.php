@@ -13,7 +13,19 @@ class EditMember extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+//             Actions\DeleteAction::make(),
         ];
+    }
+
+ protected function getFormActions(): array
+    {
+        return [
+//             Actions\DeleteAction::make(),
+        ];
+    }
+
+  protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
     }
 }

@@ -21,7 +21,9 @@ class Leader extends Model
     protected $fillable = [
         'name',
         'phone_number',
+        'image',
         'email',
+        'address',
         'no_rekening',
         'nama_bank',
         'nama_rekening',

@@ -14,4 +14,13 @@ class CreateLeader extends CreateRecord
     {
         return $this->getResource()::getUrl('index');
     }
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['image'] = config('app.url')."/storage/".$data['image'];
+
+        return $data;
+    }
+
+
 }

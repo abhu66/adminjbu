@@ -13,6 +13,9 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Placeholder;
+use Illuminate\Support\HtmlString;
+use Filament\Tables\Columns\TextColumn;
 
 class MemberResource extends Resource
 {
@@ -28,49 +31,72 @@ class MemberResource extends Resource
                  Forms\Components\Card::make()
                      ->schema([
 
+                      Placeholder::make('Profile Image')
+                       ->content(function ($record): HtmlString {
+                           $imageUrl = $record->image;
+                           return new HtmlString("
+                               <a href='#' class='filament-button' onclick='openInNewTab(\"$imageUrl\")'>
+                                   <img src='" . $imageUrl . "' alt='Image' width='200' />
+                               </a>
+
+                               <script>
+                                   function openInNewTab(imageUrl) {
+                                       window.open(imageUrl, '_blank');
+                                   }
+                               </script>
+                           ");
+                       }),
+
                          //name
                          Forms\Components\TextInput::make('name')
                            ->label('Member Name')
                            ->placeholder('Input member name')
+                           ->readOnly()
                            ->required(),
 
                          //name
                      Forms\Components\TextInput::make('phone_number')
                        ->label('Phone Number')
                        ->placeholder('Input phone number')
+                       ->readOnly()
                        ->required(),
 
                          //phone Number
                          Forms\Components\TextInput::make('email')
                            ->label('Email')
                            ->placeholder('Input email')
-                           ->required(),
+                            ->readOnly()
+                            ->required(),
 
 
                          //phone Number
                    Forms\Components\TextInput::make('no_rekening')
                      ->label('Account Number')
                      ->placeholder('Account number')
-                     ->required(),
+                      ->readOnly()
+                      ->required(),
 
                     //phone Number
                      Forms\Components\TextInput::make('nama_bank')
                        ->label('Bank Name')
                        ->placeholder('Nama Bank')
-                       ->required(),
+                        ->readOnly()
+                         ->required(),
 
 
                     //phone Number
                     Forms\Components\TextInput::make('nama_rekening')
                       ->label('Account Name')
                       ->placeholder('Account name')
+                       ->readOnly()
                       ->required(),
 
                     //phone Number
                     Forms\Components\TextInput::make('address')
                       ->label('Address')
                       ->placeholder('Alamat')
-                      ->required(),
+                      ->readOnly()
+                     ->required(),
 
                      // Leader dropdown
                     Forms\Components\Select::make('sponsor_id')
@@ -82,6 +108,8 @@ class MemberResource extends Resource
                                 ->toArray()
                         )
                         ->searchable()
+                         ->disabled()
+
                         ->required(),
 
 
@@ -95,7 +123,9 @@ class MemberResource extends Resource
                                 ->toArray()
                         )
                         ->searchable()
-                        ->required()
+                         ->disabled()
+                         ->required(),
+
                      ])
                ]);
        }
@@ -104,6 +134,14 @@ class MemberResource extends Resource
     {
         return $table
             ->columns([
+
+               // Image column
+            Tables\Columns\ImageColumn::make('image')
+                ->label('Image') // Optional: Set the column label
+                ->width(50) // Set the width of the image
+                ->height(50) // Set the height of the image
+                ->rounded() // Optional: Make the image rounded
+                ->searchable(),
                 Tables\Columns\TextColumn::make('name')->searchable(),
                 Tables\Columns\TextColumn::make('phone_number'),
                 Tables\Columns\TextColumn::make('email'),
@@ -147,7 +185,7 @@ class MemberResource extends Resource
             ])
             ->filters([])
             ->actions([
-                Tables\Actions\EditAction::make(),
+//                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

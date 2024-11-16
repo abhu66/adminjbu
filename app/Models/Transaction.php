@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Leader;
+use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 
 class Transaction extends Model
 {
@@ -30,8 +32,9 @@ class Transaction extends Model
         'komisi_sponsor',
         'komisi_leader',
         'status', //1 = pending payment, 2 = paid/approved, 3 = Cancel, 4 waiting approval
-        'reward'
-
+        'reward',
+        'sender_name',
+        'url_proof_image',
     ];
 
 
@@ -49,20 +52,5 @@ class Transaction extends Model
             $model->updated_by = Auth::id(); // Update the updated_by field when updating
         });
     }
-
-
-//        $table->string('transaction_code')->nullable();
-//                 $table->timestamp('transaction_date')->useCurrent();
-//                 $table->foreignId('product_id');
-//                 $table->foreignId('member_id');
-//                 $table->foreignId('leader_id');
-//                 $table->foreignId('sponsor_id');
-//                 $table->decimal('price', 15, 2)->default(0.00);
-//                 $table->string('no_wa', 15)->nullable();
-//                 $table->decimal('komisi_referral', 15, 2)->default(0.00);
-//                 $table->decimal('komisi_sponsor', 15, 2)->default(0.00);
-//                 $table->decimal('komisi_leader', 15, 2)->default(0.00);
-//                 $table->integer('status')->default(1); // 1 = pending payment
-//                 $table->decimal('reward', 15, 2)->default(0.00);
 
 }

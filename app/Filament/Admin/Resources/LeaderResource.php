@@ -15,6 +15,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Models\User; // Import the User model
 
+use Filament\Forms\Components\Placeholder;
+use Illuminate\Support\HtmlString;
+
 class LeaderResource extends Resource
 {
     protected static ?string $model = Leader::class;
@@ -28,6 +31,28 @@ class LeaderResource extends Resource
               //card
               Forms\Components\Card::make()
                   ->schema([
+                    Placeholder::make('Profile Image')
+                       ->content(function ($record): HtmlString {
+                           $imageUrl = $record->image;
+                           return new HtmlString("
+                               <a href='#' class='filament-button' onclick='openInNewTab(\"$imageUrl\")'>
+                                   <img src='" . $imageUrl . "' alt='Image' width='200' />
+                               </a>
+
+                               <script>
+                                   function openInNewTab(imageUrl) {
+                                       window.open(imageUrl, '_blank');
+                                   }
+                               </script>
+                           ");
+                       }),
+
+                   Forms\Components\FileUpload::make('image')
+                       ->label('Change Image')
+                       ->directory('uploads/images') // Specify the directory for image uploads
+                       ->image(),
+                        // Make the image upload optional// Enables image-specific handling and preview
+
 
                       //name
                       Forms\Components\TextInput::make('name')
@@ -109,6 +134,14 @@ class LeaderResource extends Resource
     {
        return $table
                ->columns([
+
+                // Image column
+               Tables\Columns\ImageColumn::make('image')
+                   ->label('Image') // Optional: Set the column label
+                   ->width(50) // Set the width of the image
+                   ->height(50) // Set the height of the image
+                   ->rounded() // Optional: Make the image rounded
+                   ->searchable(),
                    Tables\Columns\TextColumn::make('name')->searchable(),
                    Tables\Columns\TextColumn::make('phone_number'),
                    Tables\Columns\TextColumn::make('no_rekening')
