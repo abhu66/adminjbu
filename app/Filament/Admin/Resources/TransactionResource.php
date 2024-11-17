@@ -59,29 +59,29 @@ class TransactionResource extends Resource
                             ->label('Transaction Date')
                             ->readOnly(),
 
-                        // Product ID input field
-                        Forms\Components\TextInput::make('product_id')
-                            ->label('Product ID')
-                            ->placeholder('Input product ID')
-                            ->readOnly(),
-
-                        // Member ID input field
-                        Forms\Components\TextInput::make('member_id')
-                            ->label('Member ID')
-                            ->placeholder('Input member ID')
-                            ->readOnly(),
-
-                        // Leader ID input field
-                        Forms\Components\TextInput::make('leader_id')
-                            ->label('Leader ID')
-                            ->placeholder('Input leader ID')
-                            ->readOnly(),
-
-                        // Sponsor ID input field
-                        Forms\Components\TextInput::make('sponsor_id')
-                            ->label('Sponsor ID')
-                            ->placeholder('Input sponsor ID')
-                            ->readOnly(),
+//                         // Product ID input field
+//                         Forms\Components\TextInput::make('product_id')
+//                             ->label('Product ID')
+//                             ->placeholder('Input product ID')
+//                             ->readOnly(),
+//
+//                         // Member ID input field
+//                         Forms\Components\TextInput::make('member_id')
+//                             ->label('Member ID')
+//                             ->placeholder('Input member ID')
+//                             ->readOnly(),
+//
+//                         // Leader ID input field
+//                         Forms\Components\TextInput::make('leader_id')
+//                             ->label('Leader ID')
+//                             ->placeholder('Input leader ID')
+//                             ->readOnly(),
+//
+//                         // Sponsor ID input field
+//                         Forms\Components\TextInput::make('sponsor_id')
+//                             ->label('Sponsor ID')
+//                             ->placeholder('Input sponsor ID')
+//                             ->readOnly(),
 
                         // No WA (WhatsApp number) input field
                         Forms\Components\TextInput::make('no_wa')
@@ -102,48 +102,54 @@ class TransactionResource extends Resource
                                  return 'Rp ' . number_format($state, 0, ',', '.');
                              }),
 
-                         TextInput::make('komisi_referral')
-                             ->label('Referral Commission')
-                             ->placeholder('Input referral commission')
-                             ->readOnly() // Make the field read-only
-                             ->reactive()
-                              ->disabled()
-                             ->default(0) // Default value (0 or any other value)
-                             ->formatStateUsing(function ($state) {
-                                 // Format the state as Rupiah
-                                 return 'Rp ' . number_format($state, 0, ',', '.');
-                             }),
+//                          TextInput::make('komisi_referral')
+//                              ->label('Referral Commission')
+//                              ->placeholder('Input referral commission')
+//                              ->readOnly() // Make the field read-only
+//                              ->reactive()
+//                               ->disabled()
+//                              ->default(0) // Default value (0 or any other value)
+//                              ->formatStateUsing(function ($state) {
+//                                  // Format the state as Rupiah
+//                                  return 'Rp ' . number_format($state, 0, ',', '.');
+//                              }),
+//
+//                          TextInput::make('komisi_sponsor')
+//                              ->label('Sponsor Commission')
+//                              ->placeholder('Input sponsor commission')
+//                              ->readOnly() // Make the field read-only
+//                              ->reactive()
+//                              ->disabled()
+//                              ->default(0) // Default value (0 or any other value)
+//                              ->formatStateUsing(function ($state) {
+//                                  // Format the state as Rupiah
+//                                  return 'Rp ' . number_format($state, 0, ',', '.');
+//                              }),
+//
+//                          TextInput::make('komisi_leader')
+//                              ->label('Leader Commission')
+//                              ->placeholder('Input leader commission')
+//                              ->readOnly() // Make the field read-only
+//                              ->reactive()
+//                               ->disabled()
+//                              ->default(0) // Default value (0 or any other value)
+//                              ->formatStateUsing(function ($state) {
+//                                  // Format the state as Rupiah
+//                                  return 'Rp ' . number_format($state, 0, ',', '.');
+//                              }),
+//
+//                         // Reward input field
+//                         Forms\Components\TextInput::make('reward')
+//                             ->label('Reward')
+//                             ->placeholder('Input reward')
+//                             ->readOnly(),
 
-                         TextInput::make('komisi_sponsor')
-                             ->label('Sponsor Commission')
-                             ->placeholder('Input sponsor commission')
-                             ->readOnly() // Make the field read-only
-                             ->reactive()
-                             ->disabled()
-                             ->default(0) // Default value (0 or any other value)
-                             ->formatStateUsing(function ($state) {
-                                 // Format the state as Rupiah
-                                 return 'Rp ' . number_format($state, 0, ',', '.');
-                             }),
 
-                         TextInput::make('komisi_leader')
-                             ->label('Leader Commission')
-                             ->placeholder('Input leader commission')
-                             ->readOnly() // Make the field read-only
-                             ->reactive()
-                              ->disabled()
-                             ->default(0) // Default value (0 or any other value)
-                             ->formatStateUsing(function ($state) {
-                                 // Format the state as Rupiah
-                                 return 'Rp ' . number_format($state, 0, ',', '.');
-                             }),
-
-                        // Reward input field
-                        Forms\Components\TextInput::make('reward')
-                            ->label('Reward')
-                            ->placeholder('Input reward')
+                          // Sender Name input field
+                        Forms\Components\TextInput::make('nama_customer')
+                            ->label('Customer Name')
+                            ->placeholder('Input customer name')
                             ->readOnly(),
-
 
                         // Sender Name input field
                         Forms\Components\TextInput::make('sender_name')
@@ -202,22 +208,23 @@ class TransactionResource extends Resource
                 Tables\Columns\TextColumn::make('product_name')->searchable(),
                 Tables\Columns\TextColumn::make('transaction_code')->searchable(),
                 Tables\Columns\TextColumn::make('transaction_date')->searchable(),
-                Tables\Columns\TextColumn::make('product_id'),
-                Tables\Columns\TextColumn::make('member_id'),
-                Tables\Columns\TextColumn::make('leader_id'),
-                Tables\Columns\TextColumn::make('sponsor_id'),
+                 Tables\Columns\TextColumn::make('nama_customer')->searchable(),
+//                 Tables\Columns\TextColumn::make('product_id'),
+//                 Tables\Columns\TextColumn::make('member_id'),
+//                 Tables\Columns\TextColumn::make('leader_id'),
+//                 Tables\Columns\TextColumn::make('sponsor_id'),
                 Tables\Columns\TextColumn::make('no_wa'),
 
-TextColumn::make('komisi_referral')
-    ->formatStateUsing(fn ($state) => 'Rp ' . number_format($state, 0, ',', '.')),
-
-TextColumn::make('komisi_leader')
-    ->formatStateUsing(fn ($state) => 'Rp ' . number_format($state, 0, ',', '.')),
-
-TextColumn::make('komisi_sponsor')
-    ->formatStateUsing(fn ($state) => 'Rp ' . number_format($state, 0, ',', '.')),
-
-                Tables\Columns\TextColumn::make('reward'),
+// TextColumn::make('komisi_referral')
+//     ->formatStateUsing(fn ($state) => 'Rp ' . number_format($state, 0, ',', '.')),
+//
+// TextColumn::make('komisi_leader')
+//     ->formatStateUsing(fn ($state) => 'Rp ' . number_format($state, 0, ',', '.')),
+//
+// TextColumn::make('komisi_sponsor')
+//     ->formatStateUsing(fn ($state) => 'Rp ' . number_format($state, 0, ',', '.')),
+//
+//                 Tables\Columns\TextColumn::make('reward'),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->formatStateUsing(function ($state) {
